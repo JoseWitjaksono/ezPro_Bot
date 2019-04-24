@@ -280,6 +280,7 @@ def push_pi(bot, update, user_data):
                 nama_teknisi = model.get_teknisi(row[8])
                 nama_tl = row[29]
                 db_data['chat_id_tl'] = row[30]
+                db_data['witel_id'] = row[38]
 
         placeholders = "id = '%s'" % db_data['user_id']
         columns = "status_id = '%s', category_result_id = '%s'" % (3, 1)
@@ -307,9 +308,12 @@ def push_pi(bot, update, user_data):
               "TL : %s\n" \
               "Teknisi : %s\n" \
               "Silahkan masuk ke menu List WO untuk melihat detil WO" % (user_data['myir'], nama_tl, nama_teknisi)
-        send_message(bot, msg, '109891020')
-        send_message(bot, msg, '94075377')
-        send_message(bot, msg, '67974274')
+        if db_data['witel_id'] == 1:
+            send_message(bot, msg, '109891020')
+            send_message(bot, msg, '94075377')
+            send_message(bot, msg, '67974274')
+        elif db_data['witel_id'] == 2:
+            send_message(bot, msg, '99882346')
 
         return ConversationHandler.END
     if text == 'Tidak':
@@ -409,7 +413,7 @@ def error(bot, update, error):
 
 def main():
     # Create the EventHandler and pass it your bot's token.
-    updater = Updater("684315307:AAET1HUSKfgf4BxZconvh_-F_QDQhOiCh7Q")
+    updater = Updater("760620528:AAFG5ReJKyGjipgZe6V_NCWob8ceUP65SaY")
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
